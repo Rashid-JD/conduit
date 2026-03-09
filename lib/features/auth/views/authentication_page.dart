@@ -249,53 +249,56 @@ class _AuthenticationPageState extends ConsumerState<AuthenticationPage> {
 
     return ErrorBoundary(
       child: AdaptiveScaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Spacing.pagePadding,
-              vertical: Spacing.lg,
-            ),
-            child: Column(
-              children: [
-                // Header with progress indicator
-                _buildHeader(),
+        body: Material(
+          type: MaterialType.transparency,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Spacing.pagePadding,
+                vertical: Spacing.lg,
+              ),
+              child: Column(
+                children: [
+                  // Header with progress indicator
+                  _buildHeader(),
 
-                const SizedBox(height: Spacing.xl),
+                  const SizedBox(height: Spacing.xl),
 
-                // Main content
-                Expanded(
-                  child: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 480),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            // Server connection status
-                            _buildServerStatus(),
+                  // Main content
+                  Expanded(
+                    child: SingleChildScrollView(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 480),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              // Server connection status
+                              _buildServerStatus(),
 
-                            const SizedBox(height: Spacing.xl),
+                              const SizedBox(height: Spacing.xl),
 
-                            // Welcome section
-                            _buildWelcomeSection(),
+                              // Welcome section
+                              _buildWelcomeSection(),
 
-                            const SizedBox(height: Spacing.xl),
+                              const SizedBox(height: Spacing.xl),
 
-                            // Authentication form
-                            _buildAuthForm(),
-                          ],
+                              // Authentication form
+                              _buildAuthForm(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
 
-                // Bottom action button
-                _buildSignInButton(),
-              ],
+                  // Bottom action button
+                  _buildSignInButton(),
+                ],
+              ),
             ),
           ),
         ),
