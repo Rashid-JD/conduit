@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui' show FlutterView;
 import 'package:adaptive_platform_ui/adaptive_platform_ui.dart';
 import 'package:conduit/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -15,18 +14,6 @@ class EnhancedAccessibilityService {
     final ctx = NavigationService.context;
     if (ctx == null) return null;
     return AppLocalizations.of(ctx);
-  }
-
-  static FlutterView? _resolveView(BuildContext? context) {
-    if (context != null) {
-      try {
-        final view = View.maybeOf(context);
-        if (view != null) {
-          return view;
-        }
-      } catch (_) {}
-    }
-    return WidgetsBinding.instance.platformDispatcher.implicitView;
   }
 
   static TextDirection _resolveTextDirection(
@@ -52,11 +39,12 @@ class EnhancedAccessibilityService {
     TextDirection? textDirection,
   }) async {
     final resolvedContext = context ?? NavigationService.context;
-    final view = _resolveView(resolvedContext);
-    if (view == null) return;
-
+    if (resolvedContext != null &&
+        !MediaQuery.supportsAnnounceOf(resolvedContext)) {
+      return;
+    }
     final direction = _resolveTextDirection(resolvedContext, textDirection);
-    await SemanticsService.sendAnnouncement(view, message, direction);
+    await SemanticsService.announce(message, direction);
   }
 
   /// Announce loading state

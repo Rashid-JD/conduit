@@ -310,10 +310,7 @@ class _ServerConnectionPageState extends ConsumerState<ServerConnectionPage> {
       );
 
       // Save the server config and go directly to chat
-      await _completeAuthWithToken(
-        configWithCookies,
-        result.jwtToken!,
-      );
+      await _completeAuthWithToken(configWithCookies, result.jwtToken!);
       return;
     }
 
@@ -493,59 +490,62 @@ class _ServerConnectionPageState extends ConsumerState<ServerConnectionPage> {
 
     return ErrorBoundary(
       child: AdaptiveScaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Spacing.pagePadding,
-              vertical: Spacing.lg,
-            ),
-            child: Column(
-              children: [
-                // Header with progress indicator
-                _buildHeader(),
+        body: Material(
+          type: MaterialType.transparency,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Spacing.pagePadding,
+                vertical: Spacing.lg,
+              ),
+              child: Column(
+                children: [
+                  // Header with progress indicator
+                  _buildHeader(),
 
-                const SizedBox(height: Spacing.xl),
+                  const SizedBox(height: Spacing.xl),
 
-                // Main content
-                Expanded(
-                  child: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 480),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            // Brand header
-                            _buildBrandHeader(reviewerMode),
+                  // Main content
+                  Expanded(
+                    child: SingleChildScrollView(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 480),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              // Brand header
+                              _buildBrandHeader(reviewerMode),
 
-                            const SizedBox(height: Spacing.xl),
-
-                            // Welcome section
-                            _buildWelcomeSection(),
-
-                            const SizedBox(height: Spacing.xl),
-
-                            // Reviewer mode demo (if enabled)
-                            if (reviewerMode) ...[
-                              _buildReviewerModeSection(),
                               const SizedBox(height: Spacing.xl),
-                            ],
 
-                            // Server connection form
-                            _buildServerForm(),
-                          ],
+                              // Welcome section
+                              _buildWelcomeSection(),
+
+                              const SizedBox(height: Spacing.xl),
+
+                              // Reviewer mode demo (if enabled)
+                              if (reviewerMode) ...[
+                                _buildReviewerModeSection(),
+                                const SizedBox(height: Spacing.xl),
+                              ],
+
+                              // Server connection form
+                              _buildServerForm(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
 
-                // Bottom action button
-                _buildConnectButton(),
-              ],
+                  // Bottom action button
+                  _buildConnectButton(),
+                ],
+              ),
             ),
           ),
         ),

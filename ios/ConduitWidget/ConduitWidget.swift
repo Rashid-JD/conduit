@@ -157,9 +157,9 @@ struct ConduitWidget: Widget {
 
 // MARK: - Preview
 
-#Preview(as: .systemMedium) {
-    ConduitWidget()
-} timeline: {
-    ConduitEntry(date: .now)
+struct ConduitWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        ConduitWidgetEntryView(entry: ConduitEntry(date: .now))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+    }
 }
-
