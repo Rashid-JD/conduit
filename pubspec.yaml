@@ -112,6 +112,8 @@ flutter:
   
   assets:
     - assets/icons/
+    - assets/flutter_tex.js
+    - assets/flutter_tex.css
     - assets/mermaid.min.js
     - assets/chartjs.min.js
 
